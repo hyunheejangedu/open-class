@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026 대곡초 방과후 공개수업 방문증 발급</title>
+<title>2026 대곡초 방과후 공개수업 및 전시회 방문증 발급</title>
 <style>
   * { box-sizing: border-box; }
   body {
@@ -108,7 +108,7 @@
     <label for="name">학생명 *</label>
     <input type="text" id="name" placeholder="예) 홍길동">
 
-    <label for="grade">학년-반 *</label>
+    <label for="grade">학년-반 * <span style="font-weight:400; color:#999; font-size:12px;">(예: 1-1 형식으로 입력)</span></label>
     <input type="text" id="grade" placeholder="예) 1-1">
 
     <label for="subject">수강과목 *</label>
@@ -148,8 +148,15 @@
     var grade = document.getElementById('grade').value.trim();
     var subject = document.getElementById('subject').value.trim();
     var errorBox = document.getElementById('error');
+    var gradePattern = /^[1-6]-[1-9][0-9]?$/;
 
     if (!name || !grade || !subject) {
+      errorBox.textContent = '모든 항목을 입력해 주세요.';
+      errorBox.style.display = 'block';
+      return;
+    }
+    if (!gradePattern.test(grade)) {
+      errorBox.textContent = '학년-반은 "1-1" 형식으로 입력해 주세요. (예: 1학년 1반 → 1-1)';
       errorBox.style.display = 'block';
       return;
     }
